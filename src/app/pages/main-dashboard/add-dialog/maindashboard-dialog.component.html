@@ -1,0 +1,31 @@
+<h1 mat-dialog-title><span *ngIf="!data.id">Add</span><span *ngIf="data.id">Edit</span> Company</h1>
+<div mat-dialog-content>
+    <form #f="ngForm" (submit)="addCompanyForm(f)" class="user-form">
+        <div fxLayout="column" class="form-field-outer">
+
+            <mat-form-field class="w-100">
+                <input matInput name="company_name" [(ngModel)]="companyname" #company_name="ngModel"
+                    placeholder="Company Name" readonly>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <input matInput name="company_location" [(ngModel)]="data.company_location" #company_location="ngModel"
+                    placeholder="Enter Company Location" required="true">
+                <mat-error *ngIf="(company_location.errors && company_location.touched || f.submitted)">
+                    <small *ngIf="company_location.errors?.required" class="haserror">
+                        This field is required
+                    </small>
+                </mat-error>
+            </mat-form-field>
+            <mat-label><span style="color: #e6e616; font-size: 17px;" >&#x26a0;</span>&nbsp;<span style="color: #27271e; font-weight: 400;font-size: 15px;" >Once submitted, cannot be edited</span></mat-label>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <!-- <button mat-raised-button color="primary" [disabled]="!f.valid"><span (click)="setSave(data)"
+            *ngIf="!data.id">Save</span><span (click)="setUpdate(data)" *ngIf="data.id">Update</span></button> -->
+
+    <button mat-raised-button color="primary" [disabled]="!f.valid" (click)="setSave(data)" *ngIf="!data.id">Save</button>
+    <button mat-raised-button color="primary" [disabled]="!f.valid" (click)="setUpdate(data)" *ngIf="data.id">Update</button>
+
+    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+</div>

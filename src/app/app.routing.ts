@@ -22,7 +22,7 @@ export const routes: Routes = [
             { path: 'reports', component: ReportsComponent, data: { breadcrumb: 'Reports' } },
             { path: 'tracking-vehicle', component: VehicleTrackingComponent, data: { breadcrumb: 'Tracking Vehicle' } },
             { path: 'email-distribution', component: EmailDistributionComponent, data: { breadcrumb: 'Email Distribution' } },
-
+            { path: 'covid-tracker', loadChildren: () => import('./pages/covid/covid.module').then(m => m.CovidModule), data: { breadcrumb: 'Covid-19 Updates' } },
 
             { path: 'charts', loadChildren: () => import('./pages/charts/charts.module').then(m => m.ChartsModule), data: { breadcrumb: 'Charts' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },

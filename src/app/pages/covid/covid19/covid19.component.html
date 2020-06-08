@@ -1,0 +1,14 @@
+<div class="p-2">
+    <div fxLayout="row wrap">
+        <div *ngFor="let val of data" fxFlex="50" fxFlex.xl="33.3" fxFlex.lg="33.3" fxFlex.md="33.3" fxFlex.sm="33.3"
+            class="p-2">
+            <mat-card (click)="showReportData('total')" [ngClass]=val.class>
+                <mat-icon>{{val.icon}}</mat-icon>
+                <h2>23</h2>
+                <p>{{val.prop}}</p>
+            </mat-card>
+        </div>
+    </div>
+    <app-covid-building-reports></app-covid-building-reports>
+    <app-covid-information-cards></app-covid-information-cards>
+</div>

@@ -191,7 +191,7 @@ export class MainDashboardComponent implements OnInit {
     if (list.camera_status == true) {
 
       localStorage.setItem('company_dataitem', JSON.stringify(list));
-      let domain = this.globalServices.domain + '/ui/dashboard';
+      let domain = this.globalServices.domain + '/dashboard';
       window.location.href = domain;
     }else{
 

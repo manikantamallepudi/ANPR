@@ -1,0 +1,34 @@
+<div fxLayout="row wrap" #resizedDiv>
+    <div fxFlex="100" fxFlex.gt-sm="100" fxFlex.sm="100" class="p-2">
+        <mat-card>
+            <mat-tab-group>
+                <mat-tab label="First">
+                    <div class="w-100 h-300p" style="text-align: -webkit-center;" #resizedDiv>
+                        <mat-progress-spinner style="top: 25%;" *ngIf="loading_daily == true" color="primary"
+                            mode="indeterminate"></mat-progress-spinner>
+                        <fusioncharts [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat"
+                            [dataSource]="dataSource">
+                        </fusioncharts>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Second">
+                    <div class="w-100 h-300p second-tab" style="text-align: -webkit-center;" #resizedDiv>
+                        <mat-form-field>
+                            <mat-label>Building</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let food of foods" [value]="food.value">
+                                    {{food.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-progress-spinner style="top: 25%;" *ngIf="loading_daily == true" color="primary"
+                            mode="indeterminate"></mat-progress-spinner>
+                        <fusioncharts [width]="width" [height]="height" [type]="type" [dataFormat]="dataFormat"
+                            [dataSource]="dataSource">
+                        </fusioncharts>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </div>
+</div>

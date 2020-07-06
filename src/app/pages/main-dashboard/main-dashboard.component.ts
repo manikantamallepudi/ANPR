@@ -117,7 +117,9 @@ export class MainDashboardComponent implements OnInit {
 
   public openCompanyDialog(company) {
     let dialogRef = this.dialog.open(AddCompanyDialogComponent, {
-      data: company
+      data: company,
+      width:"50%",
+      height:"90%"
     });
     dialogRef.afterClosed().subscribe(company => {
 
@@ -191,8 +193,8 @@ export class MainDashboardComponent implements OnInit {
     if (list.camera_status == true) {
 
       localStorage.setItem('company_dataitem', JSON.stringify(list));
-      let domain = this.globalServices.domain + '/dashboard';
-      window.location.href = domain;
+      // let domain = this.globalServices.domain + '/dashboard';
+      // window.location.href = domain;
     }else{
 
     }

@@ -4,7 +4,7 @@ import { ImageDialogComponent } from './report-dialog/report-dialog.component';
 import { environment } from './../../../environments/environment.prod';
 import { Settings } from './../../app.settings.model';
 import { AppSettings } from './../../app.settings';
-import { Component, ViewChild, AfterViewInit, OnInit, ViewChildren, QueryList, ContentChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit, ViewChildren, QueryList, ContentChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialogRef } from '@angular/material';
 import { CommonServices } from '../../services/common.services';
 import { GlobalServices } from '../../services/global.service';
@@ -44,6 +44,7 @@ export interface Regno {
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],
+  // changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ReportsComponent implements OnInit, AfterViewInit {
 
@@ -110,7 +111,8 @@ export class ReportsComponent implements OnInit, AfterViewInit {
     private commonService: CommonServices,
     private globalService: GlobalServices,
     public dialog: MatDialog,
-    public router: Router) {
+    public router: Router,
+    public cd:ChangeDetectorRef) {
     this.settings = this.appSettings.settings;
 
     this.placeholderOne = '#BBBBBB';
@@ -129,7 +131,6 @@ export class ReportsComponent implements OnInit, AfterViewInit {
 
     this.anprList.paginator = this.matpaginator;
     this.anprListData.paginator = this.matpaginator;
-    
     this.data.date = new Date();
     this.paginationData();
     let dateFormat = moment(this.data.date).format('YYYY-MM-DD');
@@ -150,7 +151,9 @@ export class ReportsComponent implements OnInit, AfterViewInit {
 
   }
 
-
+  ngOnChanges() {
+    this.cd.detectChanges();
+  }
   update(el: any, pop_data: string) {
     if (pop_data == "success") {
       let dateFormat;

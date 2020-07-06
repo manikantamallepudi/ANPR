@@ -67,6 +67,7 @@ import { EditReportDialogComponent } from './pages/reports/edit-report-dialog/ed
 import { EditForm } from './pages/reports/edit-report';
 import { CustomHttpInterceptorService } from './services/http-interceptor';
 import { NgxLazyImagesModule } from 'ngx-lazy-loading-images';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -135,6 +136,7 @@ import { NgxLazyImagesModule } from 'ngx-lazy-loading-images';
     AppSettings,
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
+    { provide:APP_BASE_HREF, useValue: '/ui' },
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptorService, multi: true }
   ],
   bootstrap: [

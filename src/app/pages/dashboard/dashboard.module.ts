@@ -12,7 +12,7 @@ import { VehicleListComponent } from './vehiclelist/list.component';
 import { TrackingVehicleComponent } from './tracking-vehicle/tracking-vehicle.component';
 
 export const routes = [
-  { path: '', component: DashboardComponent, pathMatch: 'full' }
+  { path: '', component: DashboardComponent, pathMatch: 'full', }
 ];
 
 @NgModule({

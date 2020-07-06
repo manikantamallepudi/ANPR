@@ -55,7 +55,7 @@ color: white;">
                         fxFlex.gt-md="33.3" fxFlex.md="50" fxFlex.sm="50" class="p-2">
                         <mat-card fxLayout="row" class="p-0 user-content">
                             <div fxFlex="35" fxLayout="column" fxLayoutAlign="center center" class="bg-primary dashboard_company"
-                                (click)="showDashboard(list)" [ngStyle]="styleObject(list)" >
+                                [routerLink]="['/dashboard']" (click)="showDashboard(list)" [ngStyle]="styleObject(list)" >
                                 <div class="user-img">
                                     <!-- <img [src]="(path+list.company_logo)" class="transition mb-2"> -->
                                     <img [src]="getLogo(list.company_logo)" class="transition mb-2">

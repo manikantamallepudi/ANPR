@@ -12,8 +12,8 @@ import { MainDashboardComponent } from './pages/main-dashboard/main-dashboard.co
 import { EmailDistributionComponent } from './pages/email-distribution/email-distribution.component';
 
 export const routes: Routes = [
-    { path: 'main-dashboard', component: MainDashboardComponent },
     {path: '', redirectTo: 'main-dashboard', pathMatch: 'full'},
+    { path: 'main-dashboard', component: MainDashboardComponent },
     { path: 'cameraid-dashboard', component: CameraDashboardComponent },
     {
         path: '',
@@ -22,7 +22,7 @@ export const routes: Routes = [
             { path: 'reports', component: ReportsComponent, data: { breadcrumb: 'Reports' } },
             { path: 'tracking-vehicle', component: VehicleTrackingComponent, data: { breadcrumb: 'Tracking Vehicle' } },
             { path: 'email-distribution', component: EmailDistributionComponent, data: { breadcrumb: 'Email Distribution' } },
-            { path: 'covid-tracker', loadChildren: () => import('./pages/covid/covid.module').then(m => m.CovidModule), data: { breadcrumb: 'Covid-19 Updates' } },
+            { path: 'covid19', loadChildren: () => import('./pages/covid/covid.module').then(m => m.CovidModule), data: { breadcrumb: 'Covid-19 Updates' } },
 
             { path: 'charts', loadChildren: () => import('./pages/charts/charts.module').then(m => m.ChartsModule), data: { breadcrumb: 'Charts' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } },

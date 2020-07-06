@@ -12,6 +12,10 @@ import { NgForm } from '@angular/forms';
 })
 export class AddCompanyDialogComponent implements OnInit {
   companyname: string;
+  lat:number = 17.387140;
+  long:number = 78.491684;
+  mapZoom: number = 18;
+  isTracking:boolean = false;
 
 
   constructor(public dialogRef: MatDialogRef<AddCompanyDialogComponent>, private globalServices: GlobalServices,
@@ -43,11 +47,25 @@ export class AddCompanyDialogComponent implements OnInit {
 
   }
 
+  getCurrentLocation(){
+    if (navigator.geolocation) {
+      this.isTracking = true;
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.long = position.coords.longitude;
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
   setSave(data) {
     let obj = {
       "company_name": this.companyname,
       "company_location": data.company_location,
-      "company_logo": ""
+      "company_logo": "",
+      "latitude":this.lat,
+      "longitude":this.long
     }
 
     this.commonServices.addCompany(obj).subscribe(res => {
@@ -96,6 +114,11 @@ export class AddCompanyDialogComponent implements OnInit {
 
   close(): void {
     this.dialogRef.close();
+  }
+
+  markerChange(markerEvent){
+    this.lat = markerEvent.coords.lat;
+    this.long = markerEvent.coords.lng;
   }
 
 }

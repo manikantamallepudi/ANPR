@@ -53,6 +53,18 @@ export class GlobalServices implements OnInit {
             'getRecurringCount': environment.API_URL + 'recurring/vehicledata',
             'getCountReports': environment.API_URL + 'vehicles/count/data',
 
+            //covid19
+
+            'getCovidDailyReport':environment.API_URL+'covid19_last7days_count',
+            'getCovidMonthlyReport':environment.API_URL+'covid19_last5months_count',
+            'getCovidOverallData':environment.API_URL+'covid19_all_buildings_data',
+            'getCovidOverallReport':environment.API_URL+'covid19datalisting',
+            'getCovidPeopleMeet':environment.API_URL+'user_meets',
+            'getCovidOverallCount':environment.API_URL+'covid19_all_data',
+            'getCovidLatLng':environment.API_URL+'covid19_user_lat_long_data',
+            'getCovidBuildingReport':environment.API_URL+'covid19_cameras_by_bulding',
+            'getEmailForReport':this.sso_url+'userlist',
+
             //Report
             'getReportList': environment.API_URL + 'retrival/data',
             'downloadReports': environment.API_URL + 'download',

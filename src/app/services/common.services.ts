@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GlobalServices } from './global.service';
 import { HttpServices } from './http.services';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class CommonServices {
@@ -188,5 +189,54 @@ export class CommonServices {
         let url = this.globalServices.ApiUrls().getCountReports;
         return this.http.HttpRequest({ url, method: 'P', data: obj, ...obj });
     }
+
+    //covid services
+
+    getCovidDailyReport(obj) : Observable<any> {
+        let url = this.globalServices.ApiUrls().getCovidDailyReport;
+        return this.http.HttpRequest({ url, method: 'G', params: obj, ...obj });
+    }
+
+    getCovidOverallReport(obj) : Observable<any> {
+        let url = this.globalServices.ApiUrls().getCovidOverallReport;
+        return this.http.HttpRequest({ url, method: 'P', data: obj, ...obj });
+    }
+
+    getCovidPeopleMeet(obj) : Observable<any> {
+        let url = this.globalServices.ApiUrls().getCovidPeopleMeet;
+        return this.http.HttpRequest({ url, method: 'P', data: obj, ...obj });
+    }
+
+    getCovidMonthlyReport(obj) : Observable<any> {
+        let url = this.globalServices.ApiUrls().getCovidMonthlyReport;
+        return this.http.HttpRequest({ url, method: 'G', params: obj, ...obj });
+    }
+
+    getCovidOverallData() : Observable<any> {
+        let url = this.globalServices.ApiUrls().getCovidOverallData;
+        return this.http.HttpRequest({ url, method: 'G'});
+    }
+
+    getCovidOverallCount() : Observable<any> {
+        let url = this.globalServices.ApiUrls().getCovidOverallCount;
+        return this.http.HttpRequest({ url, method: 'G'});
+    }
+
+    getCovidBuildingReport(obj) : Observable<any> {
+        let url = this.globalServices.ApiUrls().getCovidBuildingReport;
+        return this.http.HttpRequest({ url, method: 'G', params: obj, ...obj });
+    }
+
+    getEmailForReports(obj) : Observable<any>  {
+        let header = this.globalServices.getAuthorization();
+        let url = this.globalServices.ApiUrls().getEmailForReport;
+        return this.http.HttpRequest({ url, method: 'G',headers:header, params: obj, ...obj });
+    }
+
+    getCovidUserLatLng() : Observable<any> {
+        let url = this.globalServices.ApiUrls().getCovidLatLng;
+        return this.http.HttpRequest({ url, method: 'G'});
+    }
+
     
 }

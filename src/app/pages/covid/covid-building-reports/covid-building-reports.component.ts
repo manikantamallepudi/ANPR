@@ -1,103 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { CovidMapDialogComponent } from '../covid-map-dialog/covid-map-dialog.component';
+import { MatDialog } from '@angular/material';
 
-const data = {
-  chart: {
-    caption: "Safety Violation",
-    subcaption: "2012-2016",
-    xaxisname: "Years",
-    yaxisname: "Violating Safety Measures",
-    formatnumberscale: "1",
-    plottooltext:
-      `<b>$dataValue</b> people were available on <b>$seriesName</b> in $label`,
-    theme: "fusion"
-  },
-  categories: [
-    {
-      category: [
-        {
-          label: "2012"
-        },
-        {
-          label: "2013"
-        },
-        {
-          label: "2014"
-        },
-        {
-          label: "2015"
-        },
-        {
-          label: "2016"
-        }
-      ]
-    }
-  ],
-  dataset: [
-    {
-      seriesname: "Total",
-      color:"#ffc868",
-      data: [
-        {
-          value: "125"
-        },
-        {
-          value: "300"
-        },
-        {
-          value: "480"
-        },
-        {
-          value: "800"
-        },
-        {
-          value: "110"
-        }
-      ]
-    },
-    {
-      seriesname: "No Mask",
-      color: "#D50000",
-      data: [
-        {
-          value: "70"
-        },
-        {
-          value: "150"
-        },
-        {
-          value: "350"
-        },
-        {
-          value: "600"
-        },
-        {
-          value: "140"
-        }
-      ]
-    },
-    {
-      seriesname: "No Social Distance",
-      color:"#8EF9FE",
-      data: [
-        {
-          value: "100"
-        },
-        {
-          value: "100"
-        },
-        {
-          value: "300"
-        },
-        {
-          value: "600"
-        },
-        {
-          value: "900"
-        }
-      ]
-    }
-  ]
-};
 
 
 @Component({
@@ -107,21 +11,48 @@ const data = {
 })
 export class CovidBuildingReportsComponent implements OnInit {
 
-  width = "100%";
-  height = "300";
-  type = "mscolumn3d";
-  dataFormat = "json";
-  dataSource = data;
+  @Input() covidData;
+  @Input() covidBuildingData;
+  @Output() onMatTabClick: EventEmitter<{ index: number, bid: number }> = new EventEmitter();
+  buildingsData = [];
 
-  foods: any[] = [
-    {value: 'steak-0', viewValue: '44A'},
-    {value: 'pizza-1', viewValue: '44B'},
-    {value: 'tacos-2', viewValue: '44C'}
-  ];
+  selectedBuilding: any;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
+  overallGreenko(event) {
+    if (event.index == 0) {
+      this.onMatTabClick.emit({ 'index': event.index, 'bid': 0 });
+    }
+    else {
+      this.onMatTabClick.emit({ 'index': event.index, 'bid': this.selectedBuilding });
+    }
+  }
+
+  onBuildingChange(val) {
+    this.onMatTabClick.emit({ 'index': 1, 'bid': this.selectedBuilding });
+  }
+
+  ngOnChanges(change: SimpleChanges) {
+    if (this.covidData) {
+      this.buildingsData = [...new Set(this.covidData.map(bInfo => {
+        return { 'id': bInfo.building_id, 'name': bInfo.building_name };
+      }))]
+      if (change['covidData']) {
+        this.selectedBuilding = this.buildingsData[0].id;
+      }
+    }
+  }
+  openMapDialog(): void {
+    let dialogRef = this.dialog.open(CovidMapDialogComponent, {
+      data: "",
+      width: '90%',
+      height: '550px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 }

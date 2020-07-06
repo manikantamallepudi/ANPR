@@ -17,9 +17,17 @@
     float: left;
     margin-left: 60px;
 }
-
+agm-map{
+    height: 290px;
+}
+.buildingSelect{
+    position: absolute;
+    left: 0px;
+    z-index: 999;
+    top: 10px;
+}
 .second-tab{
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 /* ::ng-deep .mat-progress-spinner circle, .mat-spinner circle{
